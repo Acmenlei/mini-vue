@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue 源码解读</title>
+</head>
+<body>
+  <div id="app" class="name">
+    <h2>一级</h2>
+    <p>{{ title }}</p>
+    <h2>二级：</h2>
+    <p>{{ title1.title }}</p>
+  </div>
+  <script type="module" src="./src/index.js"></script>
+  <script type="module">
+    import Vue from "./src/index.js"
+    const vm = {
+      el: '#app',
+      data: {
+        title: "标题",
+        title1: {
+            title: "二级标题"
+        },
+        arr: [{ b: 2 }, 1, 2, [ {a:4} ]]
+      }
+    }
+    new Vue(vm)
+    vm.data.title1 = { a: 1 }
+    vm.data.arr.push({ test: "标" })
+    console.log(vm.data.arr);
+  </script>
+</body>
+</html>
