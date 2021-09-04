@@ -9,12 +9,15 @@
     <h2>一级</h2>
     <p>{{ title }}</p>
     <h2>二级：</h2>
-    <p>{{ title1.title }}</p>
+    <p>{{ title1 }}</p>
+     <p>{{arr}}</p>
+    <button id="change">改变</button>
+    <button id="change2">改变2</button>
   </div>
   <script type="module" src="./src/index.js"></script>
   <script type="module">
     import Vue from "./src/index.js"
-    const vm = {
+    const app = new Vue({
       el: '#app',
       data: {
         title: "标题",
@@ -23,11 +26,13 @@
         },
         arr: [{ b: 2 }, 1, 2, [ {a:4} ]]
       }
-    }
-    new Vue(vm)
-    vm.data.title1 = { a: 1 }
-    vm.data.arr.push({ test: "标" })
-    console.log(vm.data.arr);
+    })
+    change.addEventListener("click", () => {
+      app.title1.title = "新标题"
+    })
+    change2.addEventListener("click", () => {
+      app.arr.push(1)
+    })
   </script>
 </body>
 </html>
