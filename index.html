@@ -6,20 +6,24 @@
 </head>
 <body>
   <div id="app" class="name">
-    <h2>一级</h2>
+    <h2>基础文本</h2>
     <p>{{ title }}</p>
-    <h2>二级：</h2>
-    <p>{{ title1.title }}</p>
-    <p>{{ title1.second.three }}</p>
-     <p>{{arr}}</p>
-    <button id="change">标题改变</button>
-    <button id="change2">数组项++</button>
+    <button @click="changeTitle">标题改变</button>
+    <h2>输入框v-model</h2>
+    <input type="text" v-model="title"/>
+    <h2>数组响应式</h2>
+    <p>{{arr}}</p>
+    <button @click="increament">数组项++</button>
+    <h2>methods方法</h2>
+    <p>{{counter}}</p>
+    <button @click="counterIncreament">counter++</button>
   </div>
   <script type="module">
     import Vue from "./src/index.js"
     const app = new Vue({
       el: '#app',
       data: {
+        counter: 1,
         title: "标题",
         title1: {
             title: "二级标题",
@@ -28,15 +32,18 @@
             }
         },
         arr: [ 1, 2, { b: 2 }, [ {a:4} ]]
+      },
+      methods: {
+        increament() {
+          this.arr.push(1);
+        },
+        changeTitle() {
+          this.title = "我改变了标题"
+        },
+        counterIncreament() {
+          this.counter++;
+        }
       }
-    })
-    change.addEventListener("click", () => {
-      app.title1.title = "新标题"
-      console.log("click");
-    })
-    change2.addEventListener("click", () => {
-      app.title1.second.three = "新标题标题标题"
-      app.arr.push(1) ;
     })
   </script>
 </body>
