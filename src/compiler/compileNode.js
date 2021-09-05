@@ -5,7 +5,7 @@ export default function compileNode(childNodes, vm) {
     if (node.nodeType === 1) {
       // 元素结点
       compileNode(node.childNodes, vm);
-    } else if (node.nodeType === 3 && node.textContent.match(/{{(.*)}}/g)) {
+    } else if (node.nodeType === 3 && node.textContent.match(/{{(.+?)}}/)) {
       // 文本结点
       compileTextNode(node, vm);
     }

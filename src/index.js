@@ -1,4 +1,4 @@
-import Compiler from "./compiler.js";
+import Compiler from "./compiler/compiler.js";
 import { isObject } from "./common.js";
 import compileNode from "./compiler/compileNode.js";
 import initData from "./initData.js";
@@ -16,6 +16,7 @@ export default function Vue(options) {
 
 Vue.prototype.$mount = function (vm) {
   let { el } = vm.$options;
+  // Compiler(el, vm)
   el = document.querySelector(el);
   compileNode(el.childNodes, vm);
 };

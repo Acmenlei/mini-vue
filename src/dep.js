@@ -1,7 +1,6 @@
 export default function Dep () {
     this.watchers = []
 }
-
 Dep.target = null;
 
 Dep.prototype.depend = function () {

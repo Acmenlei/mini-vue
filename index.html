@@ -9,12 +9,12 @@
     <h2>一级</h2>
     <p>{{ title }}</p>
     <h2>二级：</h2>
-    <p>{{ title1 }}</p>
+    <p>{{ title1.title }}</p>
+    <p>{{ title1.second.three }}</p>
      <p>{{arr}}</p>
-    <button id="change">改变</button>
-    <button id="change2">改变2</button>
+    <button id="change">标题改变</button>
+    <button id="change2">数组项++</button>
   </div>
-  <script type="module" src="./src/index.js"></script>
   <script type="module">
     import Vue from "./src/index.js"
     const app = new Vue({
@@ -22,16 +22,21 @@
       data: {
         title: "标题",
         title1: {
-            title: "二级标题"
+            title: "二级标题",
+            second: {
+              three: "三级标题"
+            }
         },
-        arr: [{ b: 2 }, 1, 2, [ {a:4} ]]
+        arr: [ 1, 2, { b: 2 }, [ {a:4} ]]
       }
     })
     change.addEventListener("click", () => {
       app.title1.title = "新标题"
+      console.log("click");
     })
     change2.addEventListener("click", () => {
-      app.arr.push(1)
+      app.title1.second.three = "新标题标题标题"
+      app.arr.push(1) ;
     })
   </script>
 </body>
