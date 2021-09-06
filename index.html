@@ -10,13 +10,18 @@
     <p>{{ title }}</p>
     <button @click="changeTitle">标题改变</button>
     <h2>输入框v-model</h2>
-    <input type="text" v-model="title"/>
-    <h2>数组响应式</h2>
+    <input type="text" v-model="title" />
+    <h2 :title="title">数组响应式</h2>
     <p>{{arr}}</p>
     <button @click="increament">数组项++</button>
     <h2>methods方法</h2>
     <p>{{counter}}</p>
     <button @click="counterIncreament">counter++</button>
+    <h2>Computed</h2>
+    <p>{{ sum }}</p>
+    <p>{{ sum }}</p>
+    <p>a的值：{{a}}</p>
+    <button @click="sumIncreament">sumIncreament</button>
   </div>
   <script type="module">
     import Vue from "./src/index.js"
@@ -24,27 +29,32 @@
       el: '#app',
       data: {
         counter: 1,
+        a: 10,
+        b: 15,
         title: "标题",
-        title1: {
-            title: "二级标题",
-            second: {
-              three: "三级标题"
-            }
-        },
-        arr: [ 1, 2, { b: 2 }, [ {a:4} ]]
+        arr: [1, 2, { b: 2 }, [{ a: 4 }]]
       },
       methods: {
         increament() {
           this.arr.push(1);
         },
         changeTitle() {
-          this.title = "我改变了标题"
+          this.title = "新的标题"
         },
         counterIncreament() {
           this.counter++;
+        },
+        sumIncreament() {
+          this.a++;
+        }
+      },
+      computed: {
+        sum() {
+          return this.a + this.b;
         }
       }
     })
   </script>
 </body>
+
 </html>

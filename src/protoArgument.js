@@ -1,6 +1,3 @@
-import { isArray } from "./common.js";
-import { observer } from "./observer.js";
-
 /* 数组响应式 */
 const ORIGIN_PROTO = Array.prototype;
 const ARRAY_PROTO = Object.create(ORIGIN_PROTO);
@@ -31,7 +28,7 @@ METHODS.forEach((method) => {
           break;
       }
       // 监视新添加后的值
-      if (inserted) observer(inserted); 
+      if (inserted) ob.observeArray(inserted); 
       ob.dep.notify(); // 通知更新
       return ret;
     },

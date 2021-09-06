@@ -1,4 +1,4 @@
-import {vonClick, vModel} from "./attributes.js";
+import { vonClick, vModel, vBind } from "./attributes.js";
 
 // 解析抽象语法树
 export default function parseAST(root, vm) {
@@ -12,7 +12,13 @@ export default function parseAST(root, vm) {
         if(/@click/.test(prop.name) || /v-on:click/.test(prop.name)) {
             vonClick(vnode, prop.value, vm);
             continue;
-        } // 处理vmodel语法 
+        }
+        // 处理bind语法
+        else if (/^:/.test(prop.name) || /v-bind/.test(prop.name)) {
+            vBind(vnode, prop.name, prop.value, vm)
+            continue;
+        }
+        // 处理vmodel语法 
         else if(/v-model/.test(prop.name)) {
           vModel(vnode, prop.value, vm);
         }

@@ -1,6 +1,11 @@
 import { observer } from "./observer.js";
 import Dep from "./dep.js";
-
+/**
+ * 处理对象身上的每个属性 将其包装一层拦截
+ * @param {*} target 
+ * @param {*} key 
+ * @param {*} value 
+ */
 export default function defineReactive(target, key, value) {
   const childOb = observer(value); // 递归响应式
   const dep = new Dep();
