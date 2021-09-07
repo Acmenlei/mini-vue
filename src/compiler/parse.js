@@ -7,22 +7,22 @@ export default function parseAST(root, vm) {
     vnode = document.createElement(root._tagName);
     if (root._attributes) {
       let attributes = root._attributes;
-      for (let prop of attributes) {
+      for (let prop in attributes) {
         /* 处理click语法糖 */
-        if(/@click/.test(prop.name) || /v-on:click/.test(prop.name)) {
-            vonClick(vnode, prop.value, vm);
+        if(/@click/.test(prop) || /v-on:click/.test(prop)) {
+            vonClick(vnode, attributes[prop], vm);
             continue;
         }
         // 处理bind语法
-        else if (/^:/.test(prop.name) || /v-bind/.test(prop.name)) {
-            vBind(vnode, prop.name, prop.value, vm)
+        else if (/^:/.test(prop) || /v-bind/.test(prop)) {
+            vBind(vnode, prop, attributes[prop], vm)
             continue;
         }
         // 处理vmodel语法 
-        else if(/v-model/.test(prop.name)) {
-          vModel(vnode, prop.value, vm);
+        else if(/v-model/.test(prop)) {
+          vModel(vnode, attributes[prop], vm);
         }
-        vnode.setAttribute(prop.name, prop.value);
+        vnode.setAttribute(prop, attributes[prop]);
       }
     }
     if (root.children) {

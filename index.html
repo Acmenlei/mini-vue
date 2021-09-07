@@ -6,22 +6,21 @@
 </head>
 <body>
   <div id="app" class="name">
-    <h2>基础文本</h2>
+    <h3>Base Text</h3>
     <p>{{ title }}</p>
     <button @click="changeTitle">标题改变</button>
-    <h2>输入框v-model</h2>
-    <input type="text" v-model="title" />
-    <h2 :title="title">数组响应式</h2>
+    <h3>Input model {{inputVal}}</h3>
+    <input type="text" v-model="inputVal" />
+    <h3>Observer Array</h3>
     <p>{{arr}}</p>
     <button @click="increament">数组项++</button>
-    <h2>methods方法</h2>
+    <h3>methods</h3>
     <p>{{counter}}</p>
     <button @click="counterIncreament">counter++</button>
-    <h2>Computed</h2>
-    <p>{{ sum }}</p>
-    <p>{{ sum }}</p>
-    <p>a的值：{{a}}</p>
-    <button @click="sumIncreament">sumIncreament</button>
+    <h3>Computed</h3>
+    <p>{{sum}}</p>
+    <p>{{a}}</p>
+    <button @click="sumIncreament">Increament</button>
   </div>
   <script type="module">
     import Vue from "./src/index.js"
@@ -32,7 +31,8 @@
         a: 10,
         b: 15,
         title: "标题",
-        arr: [1, 2, { b: 2 }, [{ a: 4 }]]
+        inputVal: "",
+        arr: [1, 2, 3, 4, 5]
       },
       methods: {
         increament() {

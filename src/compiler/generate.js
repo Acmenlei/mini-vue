@@ -13,15 +13,20 @@ function replaceVueGrammar(target, data) {
 export default function generatAST(root, vm) {
   let _nodeType = root.nodeType,
     _tagName = root.tagName && root.tagName.toLowerCase(),
-    _attributes = []; // 属性
+    _attributes = {}; // 属性
   let tree = {};
   if (_nodeType === 1) {
     // 元素节点
     let attribute = root.attributes;
     for (let prop of attribute) {
-      _attributes.push({ name: prop.name, value: prop.value });
+      _attributes[prop.name] = prop.value
     }
-    tree = { _nodeType, _tagName, _attributes, children: [] };
+    tree = {
+      _nodeType,
+      _tagName,
+      _attributes,
+      children: []
+    };
     if (root.childNodes.length > 0) {
       let childrens = root.childNodes;
       for (let element of childrens) {
@@ -35,7 +40,10 @@ export default function generatAST(root, vm) {
       let props = $1.trim().split(".");
       return replaceVueGrammar(props, vm);
     });
-    tree = { _nodeType, _textContent };
+    tree = {
+      _nodeType,
+      _textContent
+    };
   }
   return tree;
 }
