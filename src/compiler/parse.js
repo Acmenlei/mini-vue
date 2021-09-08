@@ -6,7 +6,7 @@ export default function parseAST(root, vm) {
   if (root._nodeType === 1) {
     if(!htmlTags.hasOwnProperty(root._tagName)) { // 不存在当前属性的话
       // 那么他就是一个组件
-      console.log(root._tagName);
+      console.log("组件标签：", root._tagName);
     }
     vnode = document.createElement(root._tagName);
     if (root._attributes) {

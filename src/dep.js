@@ -1,4 +1,4 @@
-// 存储渲染watcher
+// 存储所有的渲染watcher
 const targetStack = []
 
 let uid = 0;
@@ -9,6 +9,7 @@ export default function Dep() {
 Dep.target = null;
 
 Dep.prototype.depend = function () {
+    if(this.watchers.includes(Dep.target)) return;
     Dep.target.uid = uid;
     this.watchers.push(Dep.target);
     uid++;

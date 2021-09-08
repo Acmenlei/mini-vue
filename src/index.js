@@ -37,9 +37,10 @@ Vue.prototype.$mount = function (vm) {
 Vue.prototype.update = function (VNode) {
   // 每次生成新的虚拟dom树 去 跟老的虚拟dom树进行比较 得到补丁
   // 再将补丁打到真实dom上
-  // if(this.$vnode) {
+  // const preVNode = this.$VNode;
+  // if(preVNode) {
   //   // Dom Diff
-  //   let patches = diff(this.$vnode, VNode); // 
+  //   let patches = diff(this.$VNode, VNode);
   //   console.log("补丁", patches);
   //   doPatches(document.querySelector(this.$el), patches); // 真实节点打补丁
   // } else {
@@ -47,7 +48,7 @@ Vue.prototype.update = function (VNode) {
     const root = document.querySelector(this.$el);
     root.parentNode.replaceChild(rNode, root);
   // }
-  // this.$vnode = VNode;
+  // this.$VNode = VNode;
   // const root = document.querySelector(this.$el);
   // root.parentNode.replaceChild(rNode, root);
 }
