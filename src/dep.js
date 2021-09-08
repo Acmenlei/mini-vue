@@ -9,6 +9,7 @@ export default function Dep() {
 Dep.target = null;
 
 Dep.prototype.depend = function () {
+    // 避免重复的watcher收集
     if(this.watchers.includes(Dep.target)) return;
     Dep.target.uid = uid;
     this.watchers.push(Dep.target);
@@ -23,12 +24,13 @@ Dep.prototype.notify = function () {
         watcher.update()
     }
 }
-
+// 添加watcher
 export function pushTarget(target) {
     Dep.target = target;
     targetStack.push(target);
 }
 
+// 重置watcher
 export function popTarget() {
     targetStack.pop()
     Dep.target = targetStack[targetStack.length - 1];
