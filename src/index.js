@@ -34,20 +34,20 @@ Vue.prototype.$mount = function (vm) {
   mountComponent(vm)
 };
 // 更新操作
-Vue.prototype.update = function (ast) {
+Vue.prototype.update = function (VNode) {
   // 每次生成新的虚拟dom树 去 跟老的虚拟dom树进行比较 得到补丁
   // 再将补丁打到真实dom上
   // if(this.$vnode) {
   //   // Dom Diff
-  //   let patches = diff(this.$vnode, ast); // 
+  //   let patches = diff(this.$vnode, VNode); // 
   //   console.log("补丁", patches);
   //   doPatches(document.querySelector(this.$el), patches); // 真实节点打补丁
   // } else {
-    const rNode = parseAST(ast, this);
+    const rNode = parseAST(VNode, this);
     const root = document.querySelector(this.$el);
     root.parentNode.replaceChild(rNode, root);
   // }
-  // this.$vnode = ast;
+  // this.$vnode = VNode;
   // const root = document.querySelector(this.$el);
   // root.parentNode.replaceChild(rNode, root);
 }

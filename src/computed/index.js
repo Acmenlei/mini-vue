@@ -6,6 +6,10 @@ export default function initComputed(vm) {
     const computed = vm.$computed;
     let watcher = vm._watcher = Object.create(null);
     for (let key in computed) {
+        // 给每个属性挂载一个watcher 让所依赖的数据将计算属性收集起来
+        // 当所依赖的数据发生变化 即会去notify所有watcher去更新
+        // 更新又会进行前后虚拟dom树的diff 产生一个补丁包
+        // 最后将这个补丁包打到真实dom上
         watcher[key] = new Watcher(computed[key], {
             layz: true
         }, vm);
