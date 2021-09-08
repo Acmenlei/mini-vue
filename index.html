@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Vue 源码解读</title>
 </head>
+
 <body>
   <div id="app" class="name">
     <h3>Base Text</h3>
@@ -21,19 +22,33 @@
     <p>{{sum}}</p>
     <p>{{a}}</p>
     <button @click="sumIncreament">Increament</button>
+    <h3>child Component</h3>
+    <child></child>
   </div>
   <script type="module">
     import Vue from "./src/index.js"
+    // const child = Vue.component("child-component", {
+    //   el: "#child",
+    //   template: `<div id="child"> {{ childname }}</div>`,
+    //   data() {
+    //     return {
+    //       childname: "子组件的内容"
+    //     }
+    //   }
+    // })
     const app = new Vue({
       el: '#app',
-      data: {
-        counter: 1,
-        a: 10,
-        b: 15,
-        title: "标题",
-        inputVal: "",
-        arr: [1, 2, 3, 4, 5]
+      data() {
+        return {
+          counter: 1,
+          a: 10,
+          b: 15,
+          title: "标题",
+          inputVal: "",
+          arr: [1, 2, 3, 4, 5]
+        }
       },
+      // components: { child },
       methods: {
         increament() {
           this.arr.push(1);

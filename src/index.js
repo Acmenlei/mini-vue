@@ -6,14 +6,16 @@ import proxy from "./proxy.js"
 import initData from "./initData.js"
 import diff from "./diff/patches.js";
 import doPatches from "./diff/doPatches.js";
+// import defineComponent from "./component/defineComponent.js";
 
 export default function Vue(options) {
   if (isObject(options)) {
     this.$options = options;
-    this.$data = options.data;
+    this.$data = typeof options.data === 'function' ? options.data() : options.data;
     this.$el = options.el;
     this.$methods = options.methods;
     this.$computed = options.computed;
+    this.$component = options.components;
     this.$vnode = null; // 每次生成虚拟dom需要跟上一次的虚拟dom进行比对 产生补丁对象
     this._init(this)
   } else {
@@ -23,9 +25,9 @@ export default function Vue(options) {
 // 初始化
 Vue.prototype._init = function (vm) {
   proxy(vm); // 代理
-  initData(vm);
+  initData(vm); // 初始化data数据
   initComputed(vm);
-  vm.$mount(vm);
+  Vue.prototype.$mount(vm);
 }
 // 挂载
 Vue.prototype.$mount = function (vm) {
@@ -49,3 +51,7 @@ Vue.prototype.update = function (ast) {
   // const root = document.querySelector(this.$el);
   // root.parentNode.replaceChild(rNode, root);
 }
+
+// Vue.component = function (name, config) {
+//   return new defineComponent(name, config);
+// };

@@ -1,9 +1,13 @@
 import { vonClick, vModel, vBind } from "./attributes.js";
-
+import htmlTags from "./tags.js"
 // 解析抽象语法树
 export default function parseAST(root, vm) {
   let vnode = null;
   if (root._nodeType === 1) {
+    if(!htmlTags.hasOwnProperty(root._tagName)) { // 不存在当前属性的话
+      // 那么他就是一个组件
+      console.log(root._tagName);
+    }
     vnode = document.createElement(root._tagName);
     if (root._attributes) {
       let attributes = root._attributes;
