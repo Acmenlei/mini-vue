@@ -24,33 +24,31 @@ export default function Vue(options) {
 }
 // 初始化
 Vue.prototype._init = function (vm) {
-  proxy(vm); // 代理
+  proxy(vm); // 数据对象代理
   initData(vm); // 初始化data数据
-  initComputed(vm);
-  Vue.prototype.$mount(vm);
+  initComputed(vm); // 初始化计算属性中的值
+  this._render(vm);
 }
 // 挂载
-Vue.prototype.$mount = function (vm) {
+Vue.prototype._render = function (vm) {
   mountComponent(vm)
 };
 // 更新操作
 Vue.prototype.update = function (VNode) {
   // 每次生成新的虚拟dom树 去 跟老的虚拟dom树进行比较 得到补丁
   // 再将补丁打到真实dom上
-  // const preVNode = this.$VNode;
-  // if(preVNode) {
-  //   // Dom Diff
-  //   let patches = diff(this.$VNode, VNode);
-  //   console.log("补丁", patches);
-  //   doPatches(document.querySelector(this.$el), patches); // 真实节点打补丁
-  // } else {
+  const preVNode = this.$VNode;
+  if(preVNode) {
+    // Dom Diff
+    let patches = diff(this.$VNode, VNode);
+    console.log("补丁", patches);
+    doPatches(document.querySelector(this.$el), patches); // 真实节点打补丁
+  } else {
     const rNode = parseAST(VNode, this);
     const root = document.querySelector(this.$el);
     root.parentNode.replaceChild(rNode, root);
-  // }
-  // this.$VNode = VNode;
-  // const root = document.querySelector(this.$el);
-  // root.parentNode.replaceChild(rNode, root);
+  }
+  this.$VNode = VNode;
 }
 
 // Vue.component = function (name, config) {

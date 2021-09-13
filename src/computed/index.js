@@ -4,6 +4,7 @@ import Watcher from "../watcher.js";
  */
 export default function initComputed(vm) {
     const computed = vm.$computed;
+    // 赋值引用地址
     let watcher = vm._watcher = Object.create(null);
     for (let key in computed) {
         // 给每个属性挂载一个watcher 让所依赖的数据将计算属性收集起来
@@ -13,7 +14,7 @@ export default function initComputed(vm) {
         watcher[key] = new Watcher(computed[key], {
             layz: true
         }, vm);
-        defineComputed(vm, key, watcher);
+        defineComputed(vm, key);
     }
 }
 /**
